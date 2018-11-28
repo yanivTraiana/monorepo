@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+import "scalapb/scalapb.proto";
+import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
+
+option java_multiple_files = true;
+option java_package = "com.traiana.monorepo.api.v1.entity.pb";
+
+option (scalapb.options) = {
+  package_name: "com.traiana.monorepo.api.v1.entity.spb"
+  import: "com.trueaccord.scalapb.GeneratedMessage"
+  collection_type: "collection.immutable.Seq"
+  flat_package: true
+  single_file: true
+};
+
+
+package creditservice.api.v1.entity;
+
+message Party {
+    google.protobuf.StringValue party_ref = 1;
+    google.protobuf.StringValue party_id = 2;
+    google.protobuf.StringValue role = 3;
+    Trader trader = 4;
+
+    message Trader {
+        google.protobuf.StringValue first_name = 1;
+        google.protobuf.StringValue surname = 2;
+        google.protobuf.StringValue person_id = 3;
+    }
+}
+
+message Account {
+    google.protobuf.StringValue account_ref = 1;
+    google.protobuf.StringValue account_id = 2;
+    google.protobuf.StringValue account_beneficiary = 3;
+    google.protobuf.StringValue servicing_party = 4;
+}

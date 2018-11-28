@@ -1,0 +1,44 @@
+group 'com.traiana.common'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        maven { url 'http://artifactory.traiana.com/artifactory/libs-release' }
+        maven { url 'http://artifactory.traiana.com/artifactory/libs-snapshot' }
+    }
+}
+
+buildscript {
+    dependencies {
+        classpath "com.traiana.kit:gradle-protobuf-plugin:0.4.6"
+        classpath "com.traiana.kit:gradle-grpc-gateway-plugin:0.4.6"
+    }
+}
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'com.traiana.kit.protobuf'
+apply plugin: 'com.traiana.kit.grpc.gateway'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compileOnly "com.traiana.kit:grpc-interceptors:0.13.0"
+    compileOnly "com.traiana.kit:grpc-googleapis:0.13.0"
+}
+
+task srcJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives srcJar
+}
+
+
+repositories {
+    maven { url 'http://artifactory.traiana.com/artifactory/libs-release' }
+    maven { url 'http://artifactory.traiana.com/artifactory/libs-snapshot' }
+}
+
